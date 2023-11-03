@@ -29,10 +29,11 @@ const passwordRef = useRef(null);
 
 //copy to clipboard function
 
-  const handleCopyClick = async () => {
+  const handleCopyClick = useCallback( async () => {
     try {
+      passwordRef.current?.select()
         await navigator.clipboard.writeText(password);
-        alert("Copied to clipboard!");
+        // alert("Copied to clipboard!");
     } catch (err) {
         console.error(
             "Unable to copy to clipboard.",
@@ -40,7 +41,7 @@ const passwordRef = useRef(null);
         );
         alert("Copy to clipboard failed.");
     }
-};
+},[password]);
 
   useEffect(()=>{
     passwordGenerator()
